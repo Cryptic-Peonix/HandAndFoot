@@ -57,7 +57,7 @@ public class Book {
         addCards(cards);
         this.natural = checkNatural();
         updateTopCard();
-        updatePointVal();
+        updateBookPointVal();
         this.sketch = sketch;
     }
 
@@ -71,7 +71,7 @@ public class Book {
      * Checks the point value of the book.
      * 500 if natural, 300 if unnatural, & 0 if not closed.
      */
-    private void updatePointVal() {
+    private void updateBookPointVal() {
         if (!(rank.equals(Card.CardRank.WILD))) {
             if (closed) {
                 if (natural) {
@@ -123,7 +123,7 @@ public class Book {
      */
     public void closeBook() {
         ensureNaturalHasRed();
-        updatePointVal();
+        updateBookPointVal();
         logger.info("Book of Rank: " + rank.toString() + " has closed!");
         closed = true;
     }
@@ -186,6 +186,9 @@ public class Book {
      * @param c The collection of cards to add.
      */
     public void addCards(Collection<Card> c) {
+        if (!CardUtil.allCardsWild(c)) {
+            CardUtil.reorderWilds(c);
+        }
         for (Card card : c) {
             addCard(card);
         }

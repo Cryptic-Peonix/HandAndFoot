@@ -72,7 +72,7 @@ public class CardUtil {
      */
     public static Card.CardRank getRankFromCollection(Collection<Card> cards) {
        if (!allCardsWild(cards)) {
-           wildSecond(cards);
+           reorderWilds(cards);
        }
         Card checker = cards.iterator().next();
         Card.CardRank rank = checker.getType().getRank();
@@ -93,7 +93,7 @@ public class CardUtil {
      * @exception RuntimeException If the entire collection is composed of wild cards,
      * will throw an error.
      */
-    public static void wildSecond(Collection<Card> cards) {
+    public static void reorderWilds(Collection<Card> cards) {
         if (allCardsWild(cards))
             throw new RuntimeException("Cannot use wildSecond on an all wild set of cards!");
         Iterator<Card> iter = cards.iterator();
