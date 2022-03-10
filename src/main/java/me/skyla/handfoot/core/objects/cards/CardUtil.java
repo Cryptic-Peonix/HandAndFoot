@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import processing.core.PApplet;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Util class for cards.
@@ -70,8 +71,9 @@ public class CardUtil {
      * the same rank or are not wild.
      */
     public static Card.CardRank getRankFromCollection(Collection<Card> cards) {
-        //TODO: FIX THIS, THROWS AN ERROR IF WILD IS FIRST CARD EVEN IF THE ADDITION IS LEGAL. NEEDS A LOGIC FIX.
-        boolean allWild = true;
+       if (!allCardsWild(cards)) {
+           wildSecond(cards);
+       }
         Card checker = cards.iterator().next();
         Card.CardRank rank = checker.getType().getRank();
         for (Card c : cards) {
@@ -83,5 +85,40 @@ public class CardUtil {
                 checker = c;
         }
         return rank;
+    }
+
+    /**
+     * Checks if the first card in a non-wild collection is a wild card, if it is, swap it with a non-wild card.
+     * @param cards The collection of cards to check.
+     * @exception RuntimeException If the entire collection is composed of wild cards,
+     * will throw an error.
+     */
+    public static void wildSecond(Collection<Card> cards) {
+        if (allCardsWild(cards))
+            throw new RuntimeException("Cannot use wildSecond on an all wild set of cards!");
+        Iterator<Card> iter = cards.iterator();
+        Card first = iter.next();
+        Card second = iter.next();
+        if (first.isWild() && !second.isWild()) {
+            cards.remove(first);
+            cards.add(first);
+        } else if (first.isWild() && second.isWild()) {
+            cards.remove(first);
+            cards.remove(second);
+            cards.add(first);
+            cards.add(second);
+        } else {
+            logger.info("no wilds found in collection: " + cards);
+        }
+    }
+
+    public static boolean allCardsWild(Collection<Card> cards) {
+        boolean allWild = true;
+        for (Card c : cards) {
+            if (!c.isWild()) {
+                allWild = false;
+            }
+        }
+        return allWild;
     }
 }

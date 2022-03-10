@@ -34,6 +34,14 @@ public class Card {
     }
 
     /**
+     * Checks if the card is a wild card.
+     * @return True if the card is wild, false if not.
+     */
+    public boolean isWild() {
+        return this.getType().isWild();
+    }
+
+    /**
      * Enum of all cards in a deck. Contains their point values and suits for easy access.
      *
      * @author Connor Clark

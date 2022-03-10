@@ -56,7 +56,7 @@ public class Book {
         this.rank = CardUtil.getRankFromCollection(cards);
         addCards(cards);
         this.natural = checkNatural();
-        topCard = this.cards.get(this.cards.size() - 1);
+        updateTopCard();
         updatePointVal();
         this.sketch = sketch;
     }
@@ -72,14 +72,18 @@ public class Book {
      * 500 if natural, 300 if unnatural, & 0 if not closed.
      */
     private void updatePointVal() {
-        if (closed) {
-            if (natural) {
-                pointVal = 500;
+        if (!(rank.equals(Card.CardRank.WILD))) {
+            if (closed) {
+                if (natural) {
+                    pointVal = 500;
+                } else {
+                    pointVal = 300;
+                }
             } else {
-                pointVal = 300;
+                pointVal = 0;
             }
         } else {
-            pointVal = 0;
+            pointVal = 2000;
         }
     }
 
@@ -87,7 +91,7 @@ public class Book {
      * Updates the top card of the deck.
      */
     public void updateTopCard() {
-        topCard = cards.get(cards.size() - 1);
+        topCard = cards.get(0);
     }
 
     /**
@@ -168,12 +172,12 @@ public class Book {
             if (card.getType().isWild()) {
                 wildCount++;
             }
-        } else if (card.getType().getRank() != this.rank) {
+        } else if (card.getType().getRank() != this.rank && !card.isWild()) {
             logger.error("Card cannot be added to book! Ranks do not match!");
-        } else if ((wildCount++) > MAX_WILDS) {
+        } else if ((wildCount + 1) > MAX_WILDS) {
             logger.error("Card cannot be added to book! Book already contains 2 wild cards!");
         } else {
-            logger.error("Something went wrong, card can't be added to book, reason unknown.");
+            logger.error("Something went wrong, card can't be added to book, reason unknown. Card: " + card);
         }
     }
 

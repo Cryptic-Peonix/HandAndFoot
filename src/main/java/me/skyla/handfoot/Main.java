@@ -23,12 +23,12 @@ public class Main extends PApplet {
         x = 200;
         y = 200;
         Card card1 = new Card(this, Card.Cards.JOKER_BLACK);
-        Card card2 = new Card(this, Card.Cards.ACE_OF_DIAMONDS);
-        Card card3 = new Card(this, Card.Cards.ACE_OF_DIAMONDS);
-        Card card4 = new Card(this, Card.Cards.ACE_OF_HEARTS);
-        Card card5 = new Card(this, Card.Cards.ACE_OF_HEARTS);
-        Card card6 = new Card(this, Card.Cards.ACE_OF_HEARTS);
-        Card card7 = new Card(this, Card.Cards.ACE_OF_HEARTS);
+        Card card2 = new Card(this, Card.Cards.JOKER_BLACK);
+        Card card3 = new Card(this, Card.Cards.JOKER_BLACK);
+        Card card4 = new Card(this, Card.Cards.JOKER_BLACK);
+        Card card5 = new Card(this, Card.Cards.TWO_OF_HEARTS);
+        Card card6 = new Card(this, Card.Cards.TWO_OF_HEARTS);
+        Card card7 = new Card(this, Card.Cards.JOKER_BLACK);
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(card1);
         cards.add(card2);
