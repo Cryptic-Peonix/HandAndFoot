@@ -1,9 +1,12 @@
 package me.skyla.handfoot.core.objects.cards;
 
+import me.skyla.handfoot.util.AssetRepo;
 import org.jetbrains.annotations.Nullable;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Class for a card.
@@ -45,93 +48,94 @@ public class Card {
     public enum Cards {
 
         // Ace
-        ACE_OF_SPADES(20, CardSuit.SPADES, CardRank.ACE),
-        ACE_OF_CLUBS(20, CardSuit.CLUBS, CardRank.ACE),
-        ACE_OF_HEARTS(20, CardSuit.HEARTS, CardRank.ACE),
-        ACE_OF_DIAMONDS(20, CardSuit.DIAMONDS, CardRank.ACE),
+        ACE_OF_SPADES(20, CardSuit.SPADES, CardRank.ACE, AssetRepo.getAceOfSpades()),
+        ACE_OF_CLUBS(20, CardSuit.CLUBS, CardRank.ACE, AssetRepo.getAceOfClubs()),
+        ACE_OF_HEARTS(20, CardSuit.HEARTS, CardRank.ACE, AssetRepo.getAceOfHearts()),
+        ACE_OF_DIAMONDS(20, CardSuit.DIAMONDS, CardRank.ACE, AssetRepo.getAceOfDiamonds()),
 
         // 2
-        TWO_OF_SPADES(20, CardSuit.SPADES, CardRank.TWO),
-        TWO_OF_CLUBS(20, CardSuit.CLUBS, CardRank.TWO),
-        TWO_OF_HEARTS(20, CardSuit.HEARTS, CardRank.TWO),
-        TWO_OF_DIAMONDS(20, CardSuit.DIAMONDS, CardRank.TWO),
+        TWO_OF_SPADES(20, CardSuit.SPADES, CardRank.TWO, AssetRepo.getTwoOfSpades()),
+        TWO_OF_CLUBS(20, CardSuit.CLUBS, CardRank.TWO, AssetRepo.getTwoOfClubs()),
+        TWO_OF_HEARTS(20, CardSuit.HEARTS, CardRank.TWO, AssetRepo.getTwoOfHearts()),
+        TWO_OF_DIAMONDS(20, CardSuit.DIAMONDS, CardRank.TWO, AssetRepo.getTwoOfDiamonds()),
 
         // 3
-        THREE_OF_SPADES(-300, CardSuit.SPADES, CardRank.THREE),
-        THREE_OF_CLUBS(-300, CardSuit.CLUBS, CardRank.THREE),
-        THREE_OF_HEARTS(-500, CardSuit.HEARTS, CardRank.THREE),
-        THREE_OF_DIAMONDS(-500, CardSuit.HEARTS, CardRank.THREE),
+        THREE_OF_SPADES(-300, CardSuit.SPADES, CardRank.THREE, AssetRepo.getThreeOfSpades()),
+        THREE_OF_CLUBS(-300, CardSuit.CLUBS, CardRank.THREE, AssetRepo.getThreeOfClubs()),
+        THREE_OF_HEARTS(-500, CardSuit.HEARTS, CardRank.THREE, AssetRepo.getThreeOfHearts()),
+        THREE_OF_DIAMONDS(-500, CardSuit.HEARTS, CardRank.THREE, AssetRepo.getThreeOfDiamonds()),
 
         // 4
-        FOUR_OF_SPADES(5, CardSuit.SPADES, CardRank.FOUR),
-        FOUR_OF_CLUBS(5, CardSuit.CLUBS, CardRank.FOUR),
-        FOUR_OF_HEARTS(5, CardSuit.HEARTS, CardRank.FOUR),
-        FOUR_OF_DIAMONDS(5, CardSuit.DIAMONDS, CardRank.FOUR),
+        FOUR_OF_SPADES(5, CardSuit.SPADES, CardRank.FOUR, AssetRepo.getFourOfSpades()),
+        FOUR_OF_CLUBS(5, CardSuit.CLUBS, CardRank.FOUR, AssetRepo.getFourOfClubs()),
+        FOUR_OF_HEARTS(5, CardSuit.HEARTS, CardRank.FOUR, AssetRepo.getFourOfHearts()),
+        FOUR_OF_DIAMONDS(5, CardSuit.DIAMONDS, CardRank.FOUR, AssetRepo.getFourOfDiamonds()),
 
         // 5
-        FIVE_OF_SPADES(5, CardSuit.SPADES, CardRank.FIVE),
-        FIVE_OF_CLUBS(5, CardSuit.CLUBS, CardRank.FIVE),
-        FIVE_OF_HEARTS(5, CardSuit.HEARTS, CardRank.FIVE),
-        FIVE_OF_DIAMONDS(5, CardSuit.DIAMONDS, CardRank.FIVE),
+        FIVE_OF_SPADES(5, CardSuit.SPADES, CardRank.FIVE, AssetRepo.getFiveOfSpades()),
+        FIVE_OF_CLUBS(5, CardSuit.CLUBS, CardRank.FIVE, AssetRepo.getFiveOfClubs()),
+        FIVE_OF_HEARTS(5, CardSuit.HEARTS, CardRank.FIVE, AssetRepo.getFiveOfHearts()),
+        FIVE_OF_DIAMONDS(5, CardSuit.DIAMONDS, CardRank.FIVE, AssetRepo.getFiveOfDiamonds()),
 
         // 6
-        SIX_OF_SPADES(5, CardSuit.SPADES, CardRank.SIX),
-        SIX_OF_CLUBS(5, CardSuit.CLUBS, CardRank.SIX),
-        SIX_OF_HEARTS(5, CardSuit.HEARTS, CardRank.SIX),
-        SIX_OF_DIAMONDS(5, CardSuit.DIAMONDS, CardRank.SIX),
+        SIX_OF_SPADES(5, CardSuit.SPADES, CardRank.SIX, AssetRepo.getSixOfSpades()),
+        SIX_OF_CLUBS(5, CardSuit.CLUBS, CardRank.SIX, AssetRepo.getSixOfClubs()),
+        SIX_OF_HEARTS(5, CardSuit.HEARTS, CardRank.SIX, AssetRepo.getSixOfHearts()),
+        SIX_OF_DIAMONDS(5, CardSuit.DIAMONDS, CardRank.SIX, AssetRepo.getSixOfDiamonds()),
 
         // 7
-        SEVEN_OF_SPADES(5, CardSuit.SPADES, CardRank.SEVEN),
-        SEVEN_OF_CLUBS(5, CardSuit.CLUBS, CardRank.SEVEN),
-        SEVEN_OF_HEARTS(5, CardSuit.HEARTS, CardRank.SEVEN),
-        SEVEN_OF_DIAMONDS(5, CardSuit.DIAMONDS, CardRank.SEVEN),
+        SEVEN_OF_SPADES(5, CardSuit.SPADES, CardRank.SEVEN, AssetRepo.getSevenOfSpades()),
+        SEVEN_OF_CLUBS(5, CardSuit.CLUBS, CardRank.SEVEN, AssetRepo.getSevenOfClubs()),
+        SEVEN_OF_HEARTS(5, CardSuit.HEARTS, CardRank.SEVEN, AssetRepo.getSevenOfHearts()),
+        SEVEN_OF_DIAMONDS(5, CardSuit.DIAMONDS, CardRank.SEVEN, AssetRepo.getSevenOfDiamonds()),
 
         // 8
-        EIGHT_OF_SPADES(5, CardSuit.SPADES, CardRank.EIGHT),
-        EIGHT_OF_CLUBS(5, CardSuit.CLUBS, CardRank.EIGHT),
-        EIGHT_OF_HEARTS(5, CardSuit.HEARTS, CardRank.EIGHT),
-        EIGHT_OF_DIAMONDS(5, CardSuit.DIAMONDS, CardRank.EIGHT),
+        EIGHT_OF_SPADES(5, CardSuit.SPADES, CardRank.EIGHT, AssetRepo.getEightOfSpades()),
+        EIGHT_OF_CLUBS(5, CardSuit.CLUBS, CardRank.EIGHT, AssetRepo.getEightOfClubs()),
+        EIGHT_OF_HEARTS(5, CardSuit.HEARTS, CardRank.EIGHT, AssetRepo.getEightOfHearts()),
+        EIGHT_OF_DIAMONDS(5, CardSuit.DIAMONDS, CardRank.EIGHT, AssetRepo.getEightOfDiamonds()),
 
         // 9
-        NINE_OF_SPADES(10, CardSuit.SPADES, CardRank.NINE),
-        NINE_OF_CLUBS(10, CardSuit.CLUBS, CardRank.NINE),
-        NINE_OF_HEARTS(10, CardSuit.HEARTS, CardRank.NINE),
-        NINE_OF_DIAMONDS(10, CardSuit.DIAMONDS, CardRank.NINE),
+        NINE_OF_SPADES(10, CardSuit.SPADES, CardRank.NINE, AssetRepo.getNineOfSpades()),
+        NINE_OF_CLUBS(10, CardSuit.CLUBS, CardRank.NINE, AssetRepo.getNineOfClubs()),
+        NINE_OF_HEARTS(10, CardSuit.HEARTS, CardRank.NINE, AssetRepo.getNineOfHearts()),
+        NINE_OF_DIAMONDS(10, CardSuit.DIAMONDS, CardRank.NINE, AssetRepo.getNineOfDiamonds()),
 
         // 10
-        TEN_OF_SPADES(10, CardSuit.SPADES, CardRank.TEN),
-        TEN_OF_CLUBS(10, CardSuit.CLUBS, CardRank.TEN),
-        TEN_OF_HEARTS(10, CardSuit.HEARTS, CardRank.TEN),
-        TEN_OF_DIAMONDS(10, CardSuit.DIAMONDS, CardRank.TEN),
+        TEN_OF_SPADES(10, CardSuit.SPADES, CardRank.TEN, AssetRepo.getTenOfSpades()),
+        TEN_OF_CLUBS(10, CardSuit.CLUBS, CardRank.TEN, AssetRepo.getTenOfClubs()),
+        TEN_OF_HEARTS(10, CardSuit.HEARTS, CardRank.TEN, AssetRepo.getTenOfHearts()),
+        TEN_OF_DIAMONDS(10, CardSuit.DIAMONDS, CardRank.TEN, AssetRepo.getTenOfDiamonds()),
 
         // JACK
-        JACK_OF_SPADES(10, CardSuit.SPADES, CardRank.JACK),
-        JACK_OF_CLUBS(10, CardSuit.CLUBS, CardRank.JACK),
-        JACK_OF_HEARTS(10, CardSuit.HEARTS, CardRank.JACK),
-        JACK_OF_DIAMONDS(10, CardSuit.DIAMONDS, CardRank.JACK),
+        JACK_OF_SPADES(10, CardSuit.SPADES, CardRank.JACK, AssetRepo.getJackOfSpades()),
+        JACK_OF_CLUBS(10, CardSuit.CLUBS, CardRank.JACK, AssetRepo.getJackOfClubs()),
+        JACK_OF_HEARTS(10, CardSuit.HEARTS, CardRank.JACK, AssetRepo.getJackOfHearts()),
+        JACK_OF_DIAMONDS(10, CardSuit.DIAMONDS, CardRank.JACK, AssetRepo.getJackOfDiamonds()),
 
         // QUEEN
-        QUEEN_OF_SPADES(10, CardSuit.SPADES, CardRank.QUEEN),
-        QUEEN_OF_CLUBS(10, CardSuit.CLUBS, CardRank.QUEEN),
-        QUEEN_OF_HEARTS(10, CardSuit.HEARTS, CardRank.QUEEN),
-        QUEEN_OF_DIAMONDS(10, CardSuit.DIAMONDS, CardRank.QUEEN),
+        QUEEN_OF_SPADES(10, CardSuit.SPADES, CardRank.QUEEN, AssetRepo.getQueenOfSpades()),
+        QUEEN_OF_CLUBS(10, CardSuit.CLUBS, CardRank.QUEEN, AssetRepo.getQueenOfClubs()),
+        QUEEN_OF_HEARTS(10, CardSuit.HEARTS, CardRank.QUEEN, AssetRepo.getQueenOfHearts()),
+        QUEEN_OF_DIAMONDS(10, CardSuit.DIAMONDS, CardRank.QUEEN, AssetRepo.getQueenOfDiamonds()),
 
         // KING
-        KING_OF_SPADES(10, CardSuit.SPADES, CardRank.KING),
-        KING_OF_CLUBS(10, CardSuit.CLUBS, CardRank.KING),
-        KING_OF_HEARTS(10, CardSuit.HEARTS, CardRank.KING),
-        KING_OF_DIAMONDS(10, CardSuit.DIAMONDS, CardRank.KING),
+        KING_OF_SPADES(10, CardSuit.SPADES, CardRank.KING, AssetRepo.getKingOfSpades()),
+        KING_OF_CLUBS(10, CardSuit.CLUBS, CardRank.KING, AssetRepo.getKingOfClubs()),
+        KING_OF_HEARTS(10, CardSuit.HEARTS, CardRank.KING, AssetRepo.getKingOfHearts()),
+        KING_OF_DIAMONDS(10, CardSuit.DIAMONDS, CardRank.KING, AssetRepo.getKingOfDiamonds()),
 
         // JOKER
-        JOKER_RED(50, CardSuit.JOKER_RED, CardRank.JOKER),
-        JOKER_BLACK(50, CardSuit.JOKER_BLACK, CardRank.JOKER),
+        JOKER_RED(50, CardSuit.JOKER_RED, CardRank.JOKER, AssetRepo.getRedJoker()),
+        JOKER_BLACK(50, CardSuit.JOKER_BLACK, CardRank.JOKER, AssetRepo.getBlackJoker()),
 
         // Dummy, if this gets created, something is wrong.
-        DUMMY(0, CardSuit.CLUBS, CardRank.DUMMY);
+        DUMMY(0, CardSuit.CLUBS, CardRank.DUMMY, null);
 
         private final int pointVal;
         private final CardSuit suit;
         private final CardRank rank;
+        private BufferedImage img;
 
         /**
          * Constructor.
@@ -139,10 +143,11 @@ public class Card {
          * @param suit The card's suit.
          * @param rank The card's rank.
          */
-        Cards(int pts, CardSuit suit, CardRank rank) {
+        Cards(int pts, CardSuit suit, CardRank rank, BufferedImage img) {
             this.pointVal = pts;
             this.suit = suit;
             this.rank = rank;
+            this.img = img;
         }
 
         /**
@@ -173,6 +178,58 @@ public class Card {
             }
         }
 
+        /**
+         * Get the cards image.
+         * @return The image associated with the card.
+         */
+        public BufferedImage getImg() {
+            return img;
+        }
+
+        /**
+         * Resizes the image with width pX and height pY.
+         * @param pX New image width in pixels.
+         * @param pY New image height in pixels.
+         * @return A new image with width pX and height pY
+         */
+        private BufferedImage resizeImg(int pX, int pY) {
+            return (BufferedImage) img.getScaledInstance(pX, pY, Image.SCALE_SMOOTH);
+        }
+
+        /**
+         * Gets the image resized.
+         * @param width The new image width in px.
+         * @param height The new image height in px.
+         * @return A BufferedImage of the card with width 'width' and height 'height'.
+         */
+        public BufferedImage getImgResized(int width, int height) {
+            img = resizeImg(width, height);
+            return img;
+        }
+
+        /**
+         * Gets the image as a PImage for use in processing.
+         * @return A PImage of the card image.
+         */
+        public PImage getImgAsPImage() {
+            return new PImage(img);
+        }
+
+        /**
+         * Gets a resized version of the card image as a PImage.
+         * @param width The width of the new PImage in px.
+         * @param height The height of the new PImage in px.
+         * @return A PImage of the card with width 'width' and height 'height'.
+         */
+        public PImage getImgAsResizedPImage(int width, int height) {
+            img = resizeImg(width, height);
+            return new PImage(img);
+        }
+
+        /**
+         * Checks if the card is wild. 2s and Jokers are wild cards.
+         * @return True if it is, false if not.
+         */
         public boolean isWild() {
             return rank.equals(CardRank.TWO) || rank.equals(CardRank.JOKER);
         }
