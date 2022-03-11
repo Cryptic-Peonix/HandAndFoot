@@ -35,6 +35,8 @@ public class Game {
     public Game(String p1Name, String p2Name, String p3Name, String p4Name, String t1Name, String t2Name, PApplet sketch) {
         this.sketch = sketch;
         drawPile = new DrawPile(PLAYERS, this.sketch);
+        //TODO: Eventually, make a way for the player to get extra points by drawing exactly 20.
+        //TODO: Make it so the hand and foot drawn is given to the next player, and they pick which to be hand and foot.
         p1 = new Player(p1Name, makePlayerHandOrFoot(), makePlayerHandOrFoot());
         p2 = new Player(p2Name, makePlayerHandOrFoot(), makePlayerHandOrFoot());
         p3 = new Player(p3Name, makePlayerHandOrFoot(), makePlayerHandOrFoot());

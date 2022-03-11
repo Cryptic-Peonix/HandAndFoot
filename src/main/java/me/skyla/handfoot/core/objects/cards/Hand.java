@@ -25,7 +25,13 @@ public class Hand {
 
     public void addCard(Card c) {
         cards.add(c);
-        pointVal += c.getType().getPointVal();
+        int pts = c.getType().getPointVal();
+        if (pts > 0) {
+            pointVal += pts;
+        } else {
+            pointVal -= pts;
+        }
+
     }
 
     public void removeCards(Collection<Card> cards) {
@@ -36,6 +42,12 @@ public class Hand {
 
     public void removeCard(Card c) {
         cards.remove(c);
+        int pts = c.getType().getPointVal();
+        if (pts > 0) {
+            pointVal -= pts;
+        } else {
+            pointVal += pts;
+        }
     }
 
     public ArrayList<Card> getCards() {

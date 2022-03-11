@@ -111,9 +111,7 @@ public class CardUtil {
             cards.remove(second);
             cards.add(first);
             cards.add(second);
-        } else {
-            logger.info("collection: " + cards + " is not fully wild (CardUtil.java - reorderWilds())");
-        }
+        } //else { logger.info("collection: " + cards + " is not fully wild (CardUtil.java - reorderWilds())"); }
     }
 
     public static boolean allCardsWild(Collection<Card> cards) {

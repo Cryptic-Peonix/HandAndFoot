@@ -41,7 +41,6 @@ public class Foot {
     private void addCards(Collection<Card> cards) {
         if (cards.size() <= MAX_CARDS) {
             for (Card c : cards) {
-                footPointVal += c.getType().getPointVal();
                 addCard(c);
             }
         } else {
@@ -54,9 +53,15 @@ public class Foot {
      * @param c The card to add.
      */
     private void addCard(Card c) {
+        int pts = c.getType().getPointVal();
         if (isEnabled()) {
             if (!checkOverflow()) {
                 cards.add(c);
+                if (pts > 0) {
+                    footPointVal += pts;
+                } else {
+                    footPointVal -= pts;
+                }
             } else {
                 logger.error("Card: " + c + " Could not be added to the foot, would overflow!");
             }
