@@ -21,4 +21,8 @@ public class Deck {
             System.out.println(c.toString());
         }
     }
+
+    public ArrayList<Card> getCardList() {
+        return cardList;
+    }
 }

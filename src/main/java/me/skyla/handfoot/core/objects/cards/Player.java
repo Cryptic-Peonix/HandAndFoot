@@ -58,6 +58,7 @@ public class Player {
     public void takePlayerFoot(Player p) {
         if (HAND.isEmpty() && !FOOT.isEnabled()) {
             HAND.addCards(p.getFOOT().getCards());
+            p.disableFoot();
         } else {
             logger.error("Conditions not met to steal teammate foot.");
         }
