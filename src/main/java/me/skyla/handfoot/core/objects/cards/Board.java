@@ -86,7 +86,9 @@ public class Board {
     public void addCardsToBoard(Collection<Card> cards) {
         Card.CardRank rank = CardUtil.getRankFromCollection(cards);
         // If a book of the card rank has NOT been created, make the book.
-        if (!booksCreated.get(rank)) {
+        if (rank.equals(Card.CardRank.THREE)) {
+            Main.getLogger().error("You cannot make a book of threes!");
+        } else if (!booksCreated.get(rank)) {
             addBook(new Book(cards, sketch));
         } else { // If a book of the card rank has been created, add the cards to it.
             addCardsToBook(cards, rank);
@@ -99,7 +101,9 @@ public class Board {
      */
     public void addCardToBoard(Card c)  {
         Card.CardRank rank = c.getType().getRank();
-        if (booksCreated.get(rank)) {
+        if (rank.equals(Card.CardRank.THREE)) {
+            Main.getLogger().error("You cannot make a book of threes!");
+        } else if (booksCreated.get(rank)) {
             addCardToBook(c, rank);
         } else {
             Main.getLogger().error("Card cannot be added to board! Book of rank: " + rank + " does not exist!");
@@ -154,7 +158,6 @@ public class Board {
      */
     private void setupHashMap() {
         booksCreated.put(Card.CardRank.ACE, false);
-        booksCreated.put(Card.CardRank.THREE, false);
         booksCreated.put(Card.CardRank.FOUR, false);
         booksCreated.put(Card.CardRank.FIVE, false);
         booksCreated.put(Card.CardRank.SIX, false);
@@ -166,7 +169,6 @@ public class Board {
         booksCreated.put(Card.CardRank.QUEEN, false);
         booksCreated.put(Card.CardRank.KING, false);
         booksCreated.put(Card.CardRank.WILD, false);
-
     }
 
     /**

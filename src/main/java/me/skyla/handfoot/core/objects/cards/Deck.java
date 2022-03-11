@@ -12,7 +12,9 @@ public class Deck {
     public Deck(PApplet s) {
         for (Card.Cards cards : Card.Cards.values()) {
             Card c = new Card(s, cards);
-            cardList.add(c);
+            if (!(c.getType().equals(Card.Cards.DUMMY))) {
+                cardList.add(c);
+            }
         }
     }
 

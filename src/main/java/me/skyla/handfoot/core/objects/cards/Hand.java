@@ -49,4 +49,12 @@ public class Hand {
     public boolean isEmpty() {
         return cards.isEmpty();
     }
+
+    @Override
+    public String toString() {
+        return "Hand{" +
+                "cards=" + cards +
+                ", pointVal=" + pointVal +
+                '}';
+    }
 }

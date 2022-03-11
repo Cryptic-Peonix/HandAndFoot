@@ -20,6 +20,7 @@ public class DrawPile {
             Deck d = new Deck(this.s);
             cards.addAll(d.getCardList());
         }
+        shuffle();
     }
 
     /**
@@ -27,6 +28,20 @@ public class DrawPile {
      */
     public void shuffle() {
         Collections.shuffle(cards);
+    }
+
+    /**
+     * Draws two cards from the deck.
+     * @return The first two cards from the deck.
+     */
+    public ArrayList<Card> draw() {
+        ArrayList<Card> drawnCards = new ArrayList<>();
+        for (int i = 0; i < 2; i ++) {
+            Card c = cards.get(0);
+            drawnCards.add(c);
+            cards.remove(c);
+        }
+        return drawnCards;
     }
 
     public ArrayList<Card> getCards() {

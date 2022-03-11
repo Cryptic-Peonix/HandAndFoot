@@ -1,5 +1,6 @@
 package me.skyla.handfoot.core.objects.cards;
 
+import me.skyla.handfoot.Main;
 import me.skyla.handfoot.core.objects.cards.footstate.EnabledState;
 import me.skyla.handfoot.core.objects.cards.footstate.FootState;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ public class Foot {
     private final ArrayList<Card> cards = new ArrayList<>();
     private FootState state = new EnabledState();
     private static final Logger logger = LoggerFactory.getLogger(Foot.class);
+    private int footPointVal;
 
     /**
      * Constructor. Makes a foot with a Collection of Cards and a name.
@@ -37,8 +39,9 @@ public class Foot {
      * @param cards The collection to add.
      */
     private void addCards(Collection<Card> cards) {
-        if (cards.size() < MAX_CARDS) {
+        if (cards.size() <= MAX_CARDS) {
             for (Card c : cards) {
+                footPointVal += c.getType().getPointVal();
                 addCard(c);
             }
         } else {
@@ -119,9 +122,31 @@ public class Foot {
     }
 
     /**
+     * Get the foot's point value. Use if game has ended and foot is still open.
+     * @return The foot point value.
+     */
+    public int getFootPointVal() {
+        if (isEnabled()) {
+            return footPointVal;
+        } else {
+            Main.getLogger().info("Cannot get the point value of this foot, it is disabled.");
+            return 0;
+        }
+    }
+
+    /**
      * Prints the state status of the foot.
      */
     public void enabledStatus() {
         state.printStatus();
+    }
+
+    @Override
+    public String toString() {
+        return "Foot{" +
+                ", cards=" + cards +
+                ", state=" + state +
+                ", footPointVal=" + footPointVal +
+                '}';
     }
 }

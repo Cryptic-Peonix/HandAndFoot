@@ -64,4 +64,21 @@ public class Player {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "NAME='" + NAME + '\'' +
+                ", HAND=" + HAND +
+                ", FOOT=" + FOOT +
+                '}';
+    }
+
+    public String printHand() {
+        return "Hand of: " + NAME + ". " + HAND.toString();
+    }
+
+    public String printFoot() {
+        return "Foot of: " + NAME + ". " + FOOT.toString();
+    }
 }

@@ -3,8 +3,6 @@ package me.skyla.handfoot.core.objects.cards;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  * The game of hand and foot!
@@ -30,6 +28,8 @@ public class Game {
     private final DrawPile drawPile;
     private final ArrayList<Card> discardPile = new ArrayList<>();
 
+    private boolean gameWon = false;
+
     private final PApplet sketch;
 
     public Game(String p1Name, String p2Name, String p3Name, String p4Name, String t1Name, String t2Name, PApplet sketch) {
@@ -47,7 +47,8 @@ public class Game {
 
     private ArrayList<Card> makePlayerHandOrFoot() {
         ArrayList<Card> newHand = new ArrayList<>();
-        for (Card c : drawPile.getCards()) {
+        for (int i = 0; i < 10; i++) {
+            Card c = drawPile.getCards().get(0);
             newHand.add(c);
             drawPile.getCards().remove(c);
         }
@@ -61,6 +62,19 @@ public class Game {
         drawPile.getCards().addAll(discardPile);
         discardPile.clear();
         drawPile.shuffle();
+    }
+
+    /**
+     * A players turn.
+     * @param p The player.
+     */
+    public void playerTurn(Player p) {
+        draw(p);
+
+    }
+
+    public void draw(Player p) {
+        p.addCardsToHand(drawPile.draw());
     }
 
     public Player getP1() {
@@ -87,7 +101,7 @@ public class Game {
         return t2;
     }
 
-    public int getPLAYERS() {
+    public int getPlayerCount() {
         return PLAYERS;
     }
 

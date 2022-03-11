@@ -54,6 +54,9 @@ public class Book {
      */
     public Book(Collection<Card> cards, PApplet sketch) {
         this.rank = CardUtil.getRankFromCollection(cards);
+        if (this.rank.equals(Card.CardRank.DUMMY)) {
+            throw new RuntimeException("CANNOT MAKE A BOOK OF THREES, FIX THE FUCKING FRONTEND!!!");
+        }
         addCards(cards);
         this.natural = checkNatural();
         updateTopCard();
@@ -61,10 +64,8 @@ public class Book {
         this.sketch = sketch;
     }
 
-    private void updateCardPointVal() {
-        for (Card c : cards) {
-            cardPointVal +=  c.getType().getPointVal();
-        }
+    private void updateCardPointVal(Card c) {
+        cardPointVal += c.getType().getPointVal();
     }
 
     /**
@@ -72,19 +73,17 @@ public class Book {
      * 500 if natural, 300 if unnatural, & 0 if not closed.
      */
     private void updateBookPointVal() {
-        if (!(rank.equals(Card.CardRank.WILD))) {
             if (closed) {
                 if (natural) {
                     pointVal = 500;
+                } else if (rank.equals(Card.CardRank.WILD)) {
+                    pointVal = 2000;
                 } else {
                     pointVal = 300;
                 }
             } else {
                 pointVal = 0;
             }
-        } else {
-            pointVal = 2000;
-        }
     }
 
     /**
@@ -147,6 +146,7 @@ public class Book {
                     for (Card c : cards) {
                         if (c.getType().getRank().equals(rank)) {
                             cards.remove(c);
+                            //TODO: FIX ISSUE WHERE POSSIBLE MISSING CARDS DURING DISCARD RE-SHUFFLE
                             Card temp = CardUtil.createRedCardMatchingBlack(sketch, c);
                             cards.add(temp);
                             updateTopCard();
@@ -168,7 +168,7 @@ public class Book {
             natural = checkNatural();
             checkClosed();
             updateTopCard();
-            updateCardPointVal();
+            updateCardPointVal(card);
             if (card.getType().isWild()) {
                 wildCount++;
             }

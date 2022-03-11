@@ -21,6 +21,7 @@ public class CardUtil {
                 + " class and cannot be instantiated!");
     }
 
+    //TODO: MAKE black matching red method for unnatural books.
     /**
      * Creates a red card with the same suit as a black card.
      * @param sketch processing sketch.
@@ -84,6 +85,9 @@ public class CardUtil {
             if (!c.getType().isWild())
                 checker = c;
         }
+        if (rank.equals(Card.CardRank.THREE)) {
+            return Card.CardRank.DUMMY;
+        }
         return rank;
     }
 
@@ -108,7 +112,7 @@ public class CardUtil {
             cards.add(first);
             cards.add(second);
         } else {
-            logger.info("no wilds found in collection: " + cards);
+            logger.info("collection: " + cards + " is not fully wild (CardUtil.java - reorderWilds())");
         }
     }
 
