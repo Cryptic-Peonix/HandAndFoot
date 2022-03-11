@@ -3,6 +3,7 @@ package me.skyla.handfoot;
 import me.skyla.handfoot.core.objects.cards.Book;
 import me.skyla.handfoot.core.objects.cards.Card;
 import me.skyla.handfoot.core.objects.cards.Deck;
+import me.skyla.handfoot.core.objects.cards.Foot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import processing.core.PApplet;
