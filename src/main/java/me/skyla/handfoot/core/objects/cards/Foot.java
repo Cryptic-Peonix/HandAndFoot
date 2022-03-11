@@ -37,7 +37,7 @@ public class Foot {
      * @param cards The collection to add.
      */
     private void addCards(Collection<Card> cards) {
-        if (cards.size() == MAX_CARDS) {
+        if (cards.size() < MAX_CARDS) {
             for (Card c : cards) {
                 addCard(c);
             }
@@ -98,7 +98,7 @@ public class Foot {
      * Checks if the foot is enabled.
      * @return True if enabled, false if not.
      */
-    private boolean isEnabled() {
+    public boolean isEnabled() {
         return state.isEnabled();
     }
 
@@ -108,6 +108,14 @@ public class Foot {
     public void disable() {
         state.disable(this);
         cards.clear();
+    }
+
+    /**
+     * Get the cards of this foot.
+     * @return The ArrayList of cards.
+     */
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 
     /**

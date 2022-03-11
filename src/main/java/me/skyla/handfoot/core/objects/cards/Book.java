@@ -207,6 +207,7 @@ public class Book {
     }
 
     public Card getTopCard() {
+        updateTopCard();
         return topCard;
     }
 

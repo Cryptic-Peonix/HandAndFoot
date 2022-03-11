@@ -26,11 +26,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "type=" + type +
-                ", pointVal=" + type.getPointVal() +
-                ", color=" + type.getSuit().getColor().toString() +
-                '}';
+        return type.toString();
     }
 
     /**
@@ -226,6 +222,6 @@ public class Card {
          * Used in Book maintenance.
          */
         WILD,
-        DUMMY;
+        DUMMY
     }
 }
