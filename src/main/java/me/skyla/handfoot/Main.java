@@ -17,17 +17,18 @@ public class Main extends PApplet {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public void settings(){
-        size(600,600);
+        size(1280,720);
     }
 
     private Card card1;
+    private Card card2;
 
     public void setup(){
         x = 200;
         y = 200;
         //GameExample.runGame(this);
         card1 = new Card(this, Card.Cards.ACE_OF_HEARTS);
-        Card card2 = new Card(this, Card.Cards.ACE_OF_HEARTS);
+        card2 = new Card(this, Card.Cards.ACE_OF_DIAMONDS);
         Card card3 = new Card(this, Card.Cards.JOKER_BLACK);
         Card card4 = new Card(this, Card.Cards.ACE_OF_HEARTS);
         Card card5 = new Card(this, Card.Cards.JOKER_BLACK);
@@ -49,6 +50,7 @@ public class Main extends PApplet {
         background(200);
         stroke(255, 50);
         card1.drawCard(50, 50, 75, 100);
+        card2.drawCard(50, 75, 75, 100);
     }
 
     public static Logger getLogger() {

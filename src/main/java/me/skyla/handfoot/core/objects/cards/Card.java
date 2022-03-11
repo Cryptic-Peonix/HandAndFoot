@@ -28,7 +28,7 @@ public class Card {
     }
 
     public void drawCard(int xC, int yC, int width, int height) {
-        sketch.rect(xC, yC, width, height, 50);
+        sketch.rect(xC, yC, width, height, 5);
         sketch.image(type.getImgAsResizedPImage(width, height), xC, yC, width, height);
     }
 
