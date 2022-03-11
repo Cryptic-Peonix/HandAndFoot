@@ -1,5 +1,6 @@
 package me.skyla.handfoot.core.objects.cards;
 
+import me.skyla.handfoot.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import processing.core.PApplet;
@@ -39,9 +40,6 @@ public class Book {
      * Boolean to check if the book is closed. The book should be closed if it contains at least 7 cards.
      */
     private boolean closed;
-
-    // Logger
-    private static final Logger logger = LoggerFactory.getLogger(Book.class);
 
     private int pointVal;
     private int cardPointVal = 0;
@@ -123,7 +121,7 @@ public class Book {
     public void closeBook() {
         ensureNaturalHasRed();
         updateBookPointVal();
-        logger.info("Book of Rank: " + rank.toString() + " has closed!");
+        Main.getLogger().info("Book of Rank: " + rank.toString() + " has closed!");
         closed = true;
     }
 
@@ -173,11 +171,11 @@ public class Book {
                 wildCount++;
             }
         } else if (card.getType().getRank() != this.rank && !card.isWild()) {
-            logger.error("Card cannot be added to book! Ranks do not match!");
+            Main.getLogger().error("Card cannot be added to book! Ranks do not match!");
         } else if ((wildCount + 1) > MAX_WILDS) {
-            logger.error("Card cannot be added to book! Book already contains 2 wild cards!");
+            Main.getLogger().error("Card cannot be added to book! Book already contains 2 wild cards!");
         } else {
-            logger.error("Something went wrong, card can't be added to book, reason unknown. Card: " + card);
+            Main.getLogger().error("Something went wrong, card can't be added to book, reason unknown. Card: " + card);
         }
     }
 

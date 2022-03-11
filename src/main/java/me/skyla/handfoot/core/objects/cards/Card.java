@@ -27,6 +27,11 @@ public class Card {
         return type;
     }
 
+    public void drawCard(int xC, int yC, int width, int height) {
+        sketch.rect(xC, yC, width, height, 50);
+        sketch.image(type.getImgAsResizedPImage(width, height), xC, yC, width, height);
+    }
+
     @Override
     public String toString() {
         return type.toString();
@@ -192,8 +197,8 @@ public class Card {
          * @param pY New image height in pixels.
          * @return A new image with width pX and height pY
          */
-        private BufferedImage resizeImg(int pX, int pY) {
-            return (BufferedImage) img.getScaledInstance(pX, pY, Image.SCALE_SMOOTH);
+        private Image resizeImg(int pX, int pY) {
+            return  img.getScaledInstance(pX, pY, Image.SCALE_SMOOTH);
         }
 
         /**
@@ -202,9 +207,9 @@ public class Card {
          * @param height The new image height in px.
          * @return A BufferedImage of the card with width 'width' and height 'height'.
          */
-        public BufferedImage getImgResized(int width, int height) {
-            img = resizeImg(width, height);
-            return img;
+        public Image getImgResized(int width, int height) {
+            Image i = resizeImg(width, height);
+            return i;
         }
 
         /**
@@ -222,8 +227,8 @@ public class Card {
          * @return A PImage of the card with width 'width' and height 'height'.
          */
         public PImage getImgAsResizedPImage(int width, int height) {
-            img = resizeImg(width, height);
-            return new PImage(img);
+            Image i = resizeImg(width, height);
+            return new PImage(i);
         }
 
         /**
