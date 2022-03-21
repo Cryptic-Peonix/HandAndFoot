@@ -25,8 +25,8 @@ public class Main extends PApplet {
         x = 200;
         y = 200;
         //GameExample.runGame(this);
-        card1 = new Card(this, Card.Cards.JOKER_BLACK);
-        card2 = new Card(this, Card.Cards.ACE_OF_CLUBS);
+        card1 = new Card(this, Card.Cards.JOKER_BLACK, 50, 100);
+        card2 = new Card(this, Card.Cards.ACE_OF_SPADES, 100, 200);
         Card card3 = new Card(this, Card.Cards.JOKER_BLACK);
         Card card4 = new Card(this, Card.Cards.ACE_OF_HEARTS);
         Card card5 = new Card(this, Card.Cards.ACE_OF_CLUBS);
@@ -47,8 +47,9 @@ public class Main extends PApplet {
     public void draw(){
         background(200);
         stroke(255, 50);
-        card1.drawCard(50, 50, 75, 100);
-        card2.drawCard(50, 75, 75, 100);
+        card1.drawCard();
+        System.out.println(card1 + "\n" + card2);
+        card2.drawCard();
     }
 
     public static Logger getLogger() {
@@ -59,6 +60,7 @@ public class Main extends PApplet {
         PApplet.main("me.skyla.handfoot.Main");
         logger.info("Hello!");
     }
+
 
     //TODO: MOVE THIS OUTTA HERE, TEMP LOCATION FOR THE CODE...
 //    private static void moveMouseWithCard() {

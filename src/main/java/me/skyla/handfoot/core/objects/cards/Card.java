@@ -1,7 +1,6 @@
 package me.skyla.handfoot.core.objects.cards;
 
 import me.skyla.handfoot.util.AssetRepo;
-import org.jetbrains.annotations.Nullable;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -17,28 +16,100 @@ public class Card {
 
     private final PApplet sketch;
     private final Cards type;
+    private boolean hitTarget = false;
+    private boolean grabbed = false;
+    private int xC;
+    private int yC;
+    private final int width = 75;
+    private final int height = 100;
+    private boolean movement = true;
+
+
+    public Card(PApplet s, Cards type, int xPos, int yPos) {
+        this.sketch = s;
+        this.type = type;
+        xC = xPos;
+        yC = yPos;
+    }
 
     public Card(PApplet s, Cards type) {
         this.sketch = s;
         this.type = type;
+        xC = 50;
+        yC = 50;
     }
 
     public Cards getType() {
         return type;
     }
 
-    public void drawCard(int xC, int yC, int width, int height) {
-        sketch.rect(xC, yC, width, height, 5);
-        sketch.image(type.getImgAsResizedPImage(width, height), xC, yC, width, height);
+   //public void drawCard(int xPos, int yPos, int width, int height, boolean movement) {
+    public void drawCard() {
+        PImage card = type.getImgAsResizedPImage(width, height);
+        if (!movement) {
+            sketch.rect(xC, yC, width, height, 5);
+            sketch.image(card, xC, yC, width, height);
+        } else {
+            //first attempt at selecting and moving a card to a target region
+
+            //target position
+            int tXpos = 500;
+            int tYpos = 500;
+            int limit = 30;   //used this to choose the upper left corner of both the card and target region
+
+            //did we press the mouse near the upper left corner of the card?
+            if (sketch.mousePressed) {
+                if ((sketch.mouseX - xC) < limit && (sketch.mouseX - xC) > 0 && (sketch.mouseY - yC) < limit && (sketch.mouseY - yC) > 0)
+                    grabbed = true;
+            }
+
+            //did we release the mouse?  [NOTE: even if we did not have the card in hand this function is visited]
+            if (!sketch.mousePressed) {
+
+                //was the card being moved?
+                if (grabbed) {
+                    xC = sketch.pmouseX;
+                    yC = sketch.pmouseY;
+
+                    //if we released the card near enough to the green box inside the target region, align card and mark the flag
+                    if ((xC - tXpos) < limit && (xC - tXpos) > 0 && (yC - tYpos) < limit && (yC - tYpos) > 0) {
+                        hitTarget = true;
+                        xC = tXpos;
+                        yC = tYpos;
+                    } else
+                        hitTarget = false;
+
+                    //not holding a mouse button means have not grabbed the card
+                    grabbed = false;
+                }
+            }
+
+            //draw target
+            sketch.rect(tXpos, tYpos, 10 * limit, 10 * limit);
+            sketch.fill(0, 144, 0);
+            sketch.rect(tXpos, tYpos, limit, limit);
+            sketch.fill(255);
+
+            //if mouse is not in play
+            if (!grabbed) {
+                sketch.image(card, xC, yC);
+            }
+
+            //if mouse clicked and held
+            if (grabbed) {
+                sketch.image(card, sketch.mouseX, sketch.mouseY);
+            }
+        }
     }
 
     @Override
     public String toString() {
-        return type.toString();
+        return type.toString() + " X: " + xC + ", Y: " + yC + ".";
     }
 
     /**
      * Checks if the card is a wild card.
+     *
      * @return True if the card is wild, false if not.
      */
     public boolean isWild() {
@@ -140,11 +211,12 @@ public class Card {
         private final int pointVal;
         private final CardSuit suit;
         private final CardRank rank;
-        private BufferedImage img;
+        private final BufferedImage img;
 
         /**
          * Constructor.
-         * @param pts The card point val.
+         *
+         * @param pts  The card point val.
          * @param suit The card's suit.
          * @param rank The card's rank.
          */
@@ -157,6 +229,7 @@ public class Card {
 
         /**
          * Get the card's point val.
+         *
          * @return The card's point value.
          */
         public int getPointVal() {
@@ -165,6 +238,7 @@ public class Card {
 
         /**
          * Get the card's suit.
+         *
          * @return The card's suit.
          */
         public CardSuit getSuit() {
@@ -173,6 +247,7 @@ public class Card {
 
         /**
          * Get the card's rank.
+         *
          * @return The card's rank.
          */
         public CardRank getRank() {
@@ -185,6 +260,7 @@ public class Card {
 
         /**
          * Get the cards image.
+         *
          * @return The image associated with the card.
          */
         public BufferedImage getImg() {
@@ -193,27 +269,29 @@ public class Card {
 
         /**
          * Resizes the image with width pX and height pY.
+         *
          * @param pX New image width in pixels.
          * @param pY New image height in pixels.
          * @return A new image with width pX and height pY
          */
         private Image resizeImg(int pX, int pY) {
-            return  img.getScaledInstance(pX, pY, Image.SCALE_SMOOTH);
+            return img.getScaledInstance(pX, pY, Image.SCALE_SMOOTH);
         }
 
         /**
          * Gets the image resized.
-         * @param width The new image width in px.
+         *
+         * @param width  The new image width in px.
          * @param height The new image height in px.
          * @return A BufferedImage of the card with width 'width' and height 'height'.
          */
         public Image getImgResized(int width, int height) {
-            Image i = resizeImg(width, height);
-            return i;
+            return resizeImg(width, height);
         }
 
         /**
          * Gets the image as a PImage for use in processing.
+         *
          * @return A PImage of the card image.
          */
         public PImage getImgAsPImage() {
@@ -222,7 +300,8 @@ public class Card {
 
         /**
          * Gets a resized version of the card image as a PImage.
-         * @param width The width of the new PImage in px.
+         *
+         * @param width  The width of the new PImage in px.
          * @param height The height of the new PImage in px.
          * @return A PImage of the card with width 'width' and height 'height'.
          */
@@ -233,6 +312,7 @@ public class Card {
 
         /**
          * Checks if the card is wild. 2s and Jokers are wild cards.
+         *
          * @return True if it is, false if not.
          */
         public boolean isWild() {
@@ -257,7 +337,7 @@ public class Card {
         private final Color color;
 
         CardSuit(Color c) {
-            this.color =  c;
+            this.color = c;
         }
 
         public Color getColor() {

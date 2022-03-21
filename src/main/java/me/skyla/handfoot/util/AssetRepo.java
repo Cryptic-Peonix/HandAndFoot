@@ -10,11 +10,6 @@ import java.util.Objects;
  */
 public class AssetRepo {
 
-    private  AssetRepo() {
-        throw new UnsupportedOperationException("This is a utility"
-                + " class and cannot be instantiated!");
-    }
-
     // All Card images
     private static BufferedImage twoOfClubs;
     private static BufferedImage twoOfDiamonds;
@@ -185,6 +180,11 @@ public class AssetRepo {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private AssetRepo() {
+        throw new UnsupportedOperationException("This is a utility"
+                + " class and cannot be instantiated!");
     }
 
     // Getters for each card.
