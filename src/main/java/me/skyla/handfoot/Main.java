@@ -14,24 +14,32 @@ public class Main extends PApplet {
     private int y;
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
+    private final int FPS = 60; // SET FPS
+
     public void settings(){
         size(1280,720);
     }
 
     private Card card1;
     private Card card2;
+    private Card card3;
+    private Card card4;
+    private Card card5;
+    private Card card6;
+    private Card card7;
 
-    public void setup(){
+    public void setup() {
+        frameRate(FPS);
         x = 200;
         y = 200;
         //GameExample.runGame(this);
         card1 = new Card(this, Card.Cards.JOKER_BLACK, 50, 100);
-        card2 = new Card(this, Card.Cards.ACE_OF_SPADES, 100, 200);
-        Card card3 = new Card(this, Card.Cards.JOKER_BLACK);
-        Card card4 = new Card(this, Card.Cards.ACE_OF_HEARTS);
-        Card card5 = new Card(this, Card.Cards.ACE_OF_CLUBS);
-        Card card6 = new Card(this, Card.Cards.ACE_OF_HEARTS);
-        Card card7 = new Card(this, Card.Cards.ACE_OF_HEARTS);
+        card2 = new Card(this, Card.Cards.ACE_OF_SPADES, 50, 125);
+        card3 = new Card(this, Card.Cards.JOKER_BLACK, 50, 150);
+        card4 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 175);
+        card5 = new Card(this, Card.Cards.ACE_OF_CLUBS, 50, 200);
+        card6 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 225);
+        card7 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 250);
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(card1);
         cards.add(card2);
@@ -48,8 +56,12 @@ public class Main extends PApplet {
         background(200);
         stroke(255, 50);
         card1.drawCard();
-        System.out.println(card1 + "\n" + card2);
         card2.drawCard();
+        // card3.drawCard();
+       // card4.drawCard();
+       // card5.drawCard();
+        //card6.drawCard();
+       // card7.drawCard();
     }
 
     public static Logger getLogger() {
