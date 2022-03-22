@@ -5,6 +5,7 @@ import me.skyla.handfoot.core.objects.cards.Card;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import processing.core.PApplet;
+import processing.net.*;
 
 import java.util.ArrayList;
 
