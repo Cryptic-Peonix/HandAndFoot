@@ -1,19 +1,26 @@
 package me.skyla.handfoot;
 
-import me.skyla.handfoot.core.objects.cards.Book;
 import me.skyla.handfoot.core.objects.cards.Card;
+import me.skyla.handfoot.core.objects.cards.Game;
+import me.skyla.handfoot.util.Packet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import processing.core.PApplet;
-import processing.net.*;
-
-import java.util.ArrayList;
 
 public class Main extends PApplet {
 
     private int x;
     private int y;
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
+    private processing.net.Client client = null;
+    private processing.net.Server server = null;
+    private String ip = "127.0.0.1";
+    private int port = 12345;
+    private boolean isServer = false;
+
+    private String input;
+    private int data[] = new int[4];
 
     private final int FPS = 60; // SET FPS
 
@@ -28,41 +35,97 @@ public class Main extends PApplet {
     private Card card5;
     private Card card6;
     private Card card7;
+    private Game game;
 
     public void setup() {
         frameRate(FPS);
+        if (isServer) {
+            server = new processing.net.Server(this, port);
+        } else {
+            client = new processing.net.Client(this, ip, port);
+        }
         x = 200;
         y = 200;
         //GameExample.runGame(this);
-        card1 = new Card(this, Card.Cards.JOKER_BLACK, 50, 100);
-        card2 = new Card(this, Card.Cards.ACE_OF_SPADES, 50, 125);
-        card3 = new Card(this, Card.Cards.JOKER_BLACK, 50, 150);
-        card4 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 175);
-        card5 = new Card(this, Card.Cards.ACE_OF_CLUBS, 50, 200);
-        card6 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 225);
-        card7 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 250);
-        ArrayList<Card> cards = new ArrayList<>();
-        cards.add(card1);
-        cards.add(card2);
-        cards.add(card3);
-        cards.add(card4);
-        cards.add(card5);
-        cards.add(card6);
-        cards.add(card7);
-        Book testBook = new Book(cards, this);
-        System.out.println(testBook);
+        game = new Game("Joe Biden", "Obama", "Donald Trump", "Mike Pence", "Democrats", "Republicans", this);
+//        card1 = new Card(this, Card.Cards.JOKER_BLACK, 50, 100);
+//        card2 = new Card(this, Card.Cards.ACE_OF_SPADES, 50, 125);
+//        card3 = new Card(this, Card.Cards.JOKER_BLACK, 50, 150);
+//        card4 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 175);
+//        card5 = new Card(this, Card.Cards.ACE_OF_CLUBS, 50, 200);
+//        card6 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 225);
+//        card7 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 250);
+//        ArrayList<Card> cards = new ArrayList<>();
+//        cards.add(card1);
+//        cards.add(card2);
+//        cards.add(card3);
+//        cards.add(card4);
+//        cards.add(card5);
+//        cards.add(card6);
+//        cards.add(card7);
+//        Book testBook = new Book(cards, this);
+//        System.out.println(testBook);
     }
 
     public void draw(){
+        Packet p = new Packet("test", game);
         background(200);
         stroke(255, 50);
-        card1.drawCard();
-        card2.drawCard();
+        // card1.drawCard();
+        // card2.drawCard();
         // card3.drawCard();
-       // card4.drawCard();
-       // card5.drawCard();
-        //card6.drawCard();
-       // card7.drawCard();
+        // card4.drawCard();
+        // card5.drawCard();
+        // card6.drawCard();
+        // card7.drawCard();
+
+        // Send/receive data
+        if (isServer) {
+            // receive data from client if server
+            if (mousePressed) {
+                // Draw our line
+                stroke(255);
+                line(pmouseX, pmouseY, mouseX, mouseY);
+                // Send mouse coords to other person
+                server.write(pmouseX + " " + pmouseY + " " + mouseX + " " + mouseY + "\n");
+            }
+
+            // Receive data from client
+            client = server.available();
+            if (client != null) {
+                input = client.readString();
+                input = input.substring(0, input.indexOf("\n"));  // Only up to the newline
+                int i = 0;
+                for (String s : input.split(" ")) {
+                    data[i++] = Integer.parseInt(s);
+                }
+                // Draw line using received coords
+                stroke(0);
+                line(data[0], data[1], data[2], data[3]);
+            }
+        } else {
+            // revive data from server if client
+            if (mousePressed) {
+                // Draw our line
+                stroke(255);
+                line(pmouseX, pmouseY, mouseX, mouseY);
+                // Send mouse coords to other person
+                client.write(pmouseX + " " + pmouseY + " " + mouseX + " " + mouseY + "\n");
+            }
+
+            // Receive data from server
+            if (client.available() > 0) {
+                input = client.readString();
+                input = input.substring(0,input.indexOf("\n"));  // Only up to the newline
+                int i = 0;
+                for (String s : input.split(" ")) {
+                    data[i++] = Integer.parseInt(s);
+                }
+                // Draw line using received coords
+                stroke(0);
+                line(data[0], data[1], data[2], data[3]);
+            }
+        }
     }
 
     public static Logger getLogger() {
