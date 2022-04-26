@@ -7,6 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import processing.core.PApplet;
 
+import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.Objects;
+
 public class Main extends PApplet {
 
     private int x;
@@ -48,7 +52,7 @@ public class Main extends PApplet {
         y = 200;
         //GameExample.runGame(this);
         game = new Game("Joe Biden", "Obama", "Donald Trump", "Mike Pence", "Democrats", "Republicans", this);
-//        card1 = new Card(this, Card.Cards.JOKER_BLACK, 50, 100);
+       card1 = new Card(this, Card.Cards.JOKER_BLACK, 50, 100);
 //        card2 = new Card(this, Card.Cards.ACE_OF_SPADES, 50, 125);
 //        card3 = new Card(this, Card.Cards.JOKER_BLACK, 50, 150);
 //        card4 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 175);
@@ -71,7 +75,7 @@ public class Main extends PApplet {
         Packet p = new Packet("test", game);
         background(200);
         stroke(255, 50);
-        // card1.drawCard();
+        card1.drawCard();
         // card2.drawCard();
         // card3.drawCard();
         // card4.drawCard();
@@ -133,8 +137,15 @@ public class Main extends PApplet {
     }
 
     public static void main(String[] args) {
-        PApplet.main("me.skyla.handfoot.Main");
+        //PApplet.main("me.skyla.handfoot.Main");
         logger.info("Hello!");
+        LinkedList<String> test = new LinkedList<>();
+        test.add("Joe");
+        test.add("mama");
+        ListIterator<String> iterator =  test.listIterator(0);
+        while (iterator.hasNext()) {
+            println(iterator.next());
+        }
     }
 
 

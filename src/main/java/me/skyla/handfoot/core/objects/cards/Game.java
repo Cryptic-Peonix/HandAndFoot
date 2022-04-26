@@ -114,4 +114,12 @@ public class Game {
     public Board getTeamTwoBoard() {
         return teamTwoBoard;
     }
+
+    public String getGameDataString() {
+        return "";
+    }
+
+    public void readGameDataString() {
+
+    }
 }
