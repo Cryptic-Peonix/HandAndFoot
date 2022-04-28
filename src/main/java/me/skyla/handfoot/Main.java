@@ -2,6 +2,7 @@ package me.skyla.handfoot;
 
 import me.skyla.handfoot.core.objects.cards.Card;
 import me.skyla.handfoot.core.objects.cards.Game;
+import me.skyla.handfoot.util.CardTranslator;
 import me.skyla.handfoot.util.Packet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +20,8 @@ public class Main extends PApplet {
 
     private processing.net.Client client = null;
     private processing.net.Server server = null;
-    private String ip = "127.0.0.1";
-    private int port = 12345;
+    private String ip = "10.1.11.75";
+    private int port = 25565;
     private boolean isServer = false;
 
     private String input;
@@ -42,6 +43,8 @@ public class Main extends PApplet {
     private Game game;
 
     public void setup() {
+        CardTranslator translator = new CardTranslator();
+        translator.setup(this);
         frameRate(FPS);
         if (isServer) {
             server = new processing.net.Server(this, port);
@@ -75,7 +78,7 @@ public class Main extends PApplet {
         Packet p = new Packet("test", game);
         background(200);
         stroke(255, 50);
-        card1.drawCard();
+        //card1.drawCard();
         // card2.drawCard();
         // card3.drawCard();
         // card4.drawCard();
@@ -137,15 +140,8 @@ public class Main extends PApplet {
     }
 
     public static void main(String[] args) {
-        //PApplet.main("me.skyla.handfoot.Main");
-        logger.info("Hello!");
-        LinkedList<String> test = new LinkedList<>();
-        test.add("Joe");
-        test.add("mama");
-        ListIterator<String> iterator =  test.listIterator(0);
-        while (iterator.hasNext()) {
-            println(iterator.next());
-        }
+        PApplet.main("me.skyla.handfoot.Main");
+
     }
 
 
