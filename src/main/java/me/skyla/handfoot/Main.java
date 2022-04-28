@@ -2,12 +2,14 @@ package me.skyla.handfoot;
 
 import me.skyla.handfoot.core.objects.cards.Card;
 import me.skyla.handfoot.core.objects.cards.Game;
+import me.skyla.handfoot.core.objects.cards.Hand;
 import me.skyla.handfoot.util.CardTranslator;
 import me.skyla.handfoot.util.Packet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import processing.core.PApplet;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Objects;
@@ -22,7 +24,7 @@ public class Main extends PApplet {
     private processing.net.Server server = null;
     private String ip = "10.1.11.75";
     private int port = 25565;
-    private boolean isServer = false;
+    private boolean isServer = true;
 
     private String input;
     private int data[] = new int[4];
@@ -43,8 +45,8 @@ public class Main extends PApplet {
     private Game game;
 
     public void setup() {
-        CardTranslator translator = new CardTranslator();
-        translator.setup(this);
+        CardTranslator translator = new CardTranslator(this);
+        System.out.println(translator.getStringFromCard(Card.Cards.ACE_OF_HEARTS));
         frameRate(FPS);
         if (isServer) {
             server = new processing.net.Server(this, port);
@@ -56,20 +58,22 @@ public class Main extends PApplet {
         //GameExample.runGame(this);
         game = new Game("Joe Biden", "Obama", "Donald Trump", "Mike Pence", "Democrats", "Republicans", this);
        card1 = new Card(this, Card.Cards.JOKER_BLACK, 50, 100);
-//        card2 = new Card(this, Card.Cards.ACE_OF_SPADES, 50, 125);
-//        card3 = new Card(this, Card.Cards.JOKER_BLACK, 50, 150);
-//        card4 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 175);
-//        card5 = new Card(this, Card.Cards.ACE_OF_CLUBS, 50, 200);
-//        card6 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 225);
-//        card7 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 250);
-//        ArrayList<Card> cards = new ArrayList<>();
-//        cards.add(card1);
-//        cards.add(card2);
-//        cards.add(card3);
-//        cards.add(card4);
-//        cards.add(card5);
-//        cards.add(card6);
-//        cards.add(card7);
+        card2 = new Card(this, Card.Cards.ACE_OF_SPADES, 50, 125);
+        card3 = new Card(this, Card.Cards.JOKER_BLACK, 50, 150);
+        card4 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 175);
+        card5 = new Card(this, Card.Cards.ACE_OF_CLUBS, 50, 200);
+        card6 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 225);
+        card7 = new Card(this, Card.Cards.ACE_OF_HEARTS, 50, 250);
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        cards.add(card4);
+        cards.add(card5);
+        cards.add(card6);
+        cards.add(card7);
+        Hand testHand = new Hand(cards, this);
+        System.out.println(testHand.getDataString());
 //        Book testBook = new Book(cards, this);
 //        System.out.println(testBook);
     }

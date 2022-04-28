@@ -1,5 +1,8 @@
 package me.skyla.handfoot.core.objects.cards;
 
+import me.skyla.handfoot.util.CardTranslator;
+import processing.core.PApplet;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -12,8 +15,11 @@ public class Hand {
 
     private final ArrayList<Card> cards = new ArrayList<>();
     private int pointVal = 0;
+    private String dataString = "";
+    private PApplet sketch;
 
-    public Hand(Collection<Card> cards) {
+    public Hand(Collection<Card> cards, PApplet sketch) {
+        this.sketch = sketch;
         addCards(cards);
     }
 
@@ -31,7 +37,7 @@ public class Hand {
         } else {
             pointVal -= pts;
         }
-
+        createHandDataString();
     }
 
     public void removeCards(Collection<Card> cards) {
@@ -48,6 +54,7 @@ public class Hand {
         } else {
             pointVal += pts;
         }
+        createHandDataString();
     }
 
     public ArrayList<Card> getCards() {
@@ -60,6 +67,23 @@ public class Hand {
 
     public boolean isEmpty() {
         return cards.isEmpty();
+    }
+
+    private void createHandDataString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        CardTranslator translator = new CardTranslator(sketch);
+        for (Card c : cards) {
+            Card.Cards type = c.getType();
+            //System.out.println(type);
+            String s = translator.getStringFromCard(type);
+            //System.out.println(s);
+            stringBuilder.append(s);
+        }
+        dataString = stringBuilder.toString();
+    }
+
+    public String getDataString() {
+        return dataString;
     }
 
     @Override

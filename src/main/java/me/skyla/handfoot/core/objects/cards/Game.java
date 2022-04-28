@@ -37,10 +37,10 @@ public class Game {
         drawPile = new DrawPile(PLAYERS, this.sketch);
         //TODO: Eventually, make a way for the player to get extra points by drawing exactly 20.
         //TODO: Make it so the hand and foot drawn is given to the next player, and they pick which to be hand and foot.
-        p1 = new Player(p1Name, makePlayerHandOrFoot(), makePlayerHandOrFoot());
-        p2 = new Player(p2Name, makePlayerHandOrFoot(), makePlayerHandOrFoot());
-        p3 = new Player(p3Name, makePlayerHandOrFoot(), makePlayerHandOrFoot());
-        p4 = new Player(p4Name, makePlayerHandOrFoot(), makePlayerHandOrFoot());
+        p1 = new Player(p1Name, makePlayerHandOrFoot(), makePlayerHandOrFoot(), sketch);
+        p2 = new Player(p2Name, makePlayerHandOrFoot(), makePlayerHandOrFoot(), sketch);
+        p3 = new Player(p3Name, makePlayerHandOrFoot(), makePlayerHandOrFoot(), sketch);
+        p4 = new Player(p4Name, makePlayerHandOrFoot(), makePlayerHandOrFoot(), sketch);
         t1 = new Team(p1, p2, t1Name);
         t2 = new Team(p3, p4, t2Name);
         teamOneBoard = new Board(t1, this.sketch);

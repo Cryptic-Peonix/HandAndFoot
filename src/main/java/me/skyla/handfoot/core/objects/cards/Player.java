@@ -2,6 +2,7 @@ package me.skyla.handfoot.core.objects.cards;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import processing.core.PApplet;
 
 import java.util.Collection;
 
@@ -16,10 +17,12 @@ public class Player {
     private final Hand HAND;
     private final Foot FOOT;
     private static final Logger logger = LoggerFactory.getLogger(Player.class);
+    private PApplet sketch;
 
-    public Player(String name, Collection<Card> hand, Collection<Card> foot) {
+    public Player(String name, Collection<Card> hand, Collection<Card> foot, PApplet sketch) {
+        this.sketch = sketch;
         this.NAME = name;
-        this.HAND = new Hand(hand);
+        this.HAND = new Hand(hand, sketch);
         this.FOOT = new Foot(foot, name + "'s foot");
     }
 
